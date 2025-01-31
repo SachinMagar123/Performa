@@ -10,4 +10,4 @@ const Employee = () => {
   )
 }
 
-export default E
+export default Employee
