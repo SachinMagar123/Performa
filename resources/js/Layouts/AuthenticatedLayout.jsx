@@ -25,28 +25,48 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </Link>
                             </div>
 
+                            {/* admin-nav */}
 
-                            
 
+                            {user.role == 'admin' && (
+
+                                <>
+                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                  <NavLink>
+                                    <Link href={route('admin.dashboard')}>Admin Dashboard</Link>
+                                  </NavLink>
+                                    </div>
+
+                                    
+                                </>
+                            )}
                             {/* employee-nav */}
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    HOME
-                                </NavLink>
-                            </div>
 
-                            {/* tasklist nav */}
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
+                            {user.role == 'employee' && (
+
+                                <>
+                                  <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                   <NavLink
+                                  href={route('dashboard')}
+                                      active={route().current('dashboard')}
+                                   >
+                                          HOME
+                                        </NavLink>
+                                        </div>
+
+                                   <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                   <NavLink
                                     href={route('employee.task-list')}
-                                    active={route().current('employee.task-list')}
-                                >
+                                      active={route().current('employee.task-list')}
+                                   >
                                     TASKLIST
-                                </NavLink>
-                            </div>
+                                    </NavLink>
+                                      </div>
+                                </>
+
+                                        
+                            )}
+                        
 
 
                         </div>
