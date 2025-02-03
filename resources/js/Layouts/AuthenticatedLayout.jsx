@@ -25,9 +25,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </Link>
                             </div>
 
+<<<<<<< HEAD
 
                             
 
+=======
+>>>>>>> c88f325c4fa54654e53018d31476292e60a2318c
                             {/* employee-nav */}
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
