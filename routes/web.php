@@ -1,9 +1,7 @@
 <?php
 
-<<<<<<< HEAD
 use App\Http\Controllers\AdminController;
-=======
->>>>>>> c88f325c4fa54654e53018d31476292e60a2318c
+
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -31,17 +29,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 //admin routes
-<<<<<<< HEAD
 Route::middleware(['auth', 'role:admin'])->group(function () {
   
     Route::get('/admin-dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
   
-=======
-Route::middleware(['auth', 'admin'])->group(function () {
-    // Route::get('/admin', function () {
-    //     return view('admin.dashboard');
-    // });
->>>>>>> c88f325c4fa54654e53018d31476292e60a2318c
 });
 
 Route::middleware('auth')->group(function () {
