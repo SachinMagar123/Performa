@@ -19,6 +19,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/">
+<<<<<<< HEAD
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                                 </Link>
                             </div>
@@ -32,6 +33,60 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </NavLink>
                             </div>
                         </div>
+=======
+                                    {/* <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-" />
+                                     */}
+                                     <div className="text-white">PERFORMA</div>
+                                </Link>
+                            </div>
+
+                            {/* admin-nav */}
+
+
+                            {user.role == 'admin' && (
+
+                                <>
+                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                  <NavLink>
+                                    <Link href={route('admin.dashboard')}>Admin Dashboard</Link>
+                                  </NavLink>
+                                    </div>
+
+                                    
+                                </>
+                            )}
+                            {/* employee-nav */}
+
+                            {user.role == 'employee' && (
+
+                                <>
+                                  <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                   <NavLink
+                                  href={route('dashboard')}
+                                      active={route().current('dashboard')}
+                                   >
+                                          HOME
+                                        </NavLink>
+                                        </div>
+
+                                   <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                   <NavLink
+                                    href={route('employee.task-list')}
+                                      active={route().current('employee.task-list')}
+                                   >
+                                    TASKLIST
+                                    </NavLink>
+                                      </div>
+                                </>
+
+                                        
+                            )}
+                        
+
+
+                        </div>
+                   
+>>>>>>> Sachin
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
                             <div className="relative ms-3">

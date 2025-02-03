@@ -7,8 +7,8 @@ use Inertia\Inertia;
 
 class EmployeeController extends Controller
 {
-    //
-    function home(){
-        return Inertia::render('Employee/employee');
-    }
+
+public function taskList(){
+    return Inertia::render('Employee/TaskList');
+}
 }
