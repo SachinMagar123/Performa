@@ -19,21 +19,6 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
                                 <Link href="/">
-<<<<<<< HEAD
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                                </Link>
-                            </div>
-
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                        </div>
-=======
                                     {/* <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-" />
                                      */}
                                      <div className="text-white">PERFORMA</div>
@@ -50,9 +35,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                   <NavLink>
                                     <Link href={route('admin.dashboard')}>Admin Dashboard</Link>
                                   </NavLink>
-                                    </div>
-
-                                    
+                                    </div>    
                                 </>
                             )}
                             {/* employee-nav */}
@@ -86,7 +69,6 @@ export default function AuthenticatedLayout({ header, children }) {
 
                         </div>
                    
->>>>>>> Sachin
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
                             <div className="relative ms-3">
