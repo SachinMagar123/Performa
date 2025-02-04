@@ -24,6 +24,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('/employee-task-list',[EmployeeController::class, 'taskList'])->name('employee.task-list');
+    Route::get('/employee-add-task',[EmployeeController::class, 'addTask'])->name('employee.add-task');
 
 }); 
 
