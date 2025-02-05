@@ -7,7 +7,7 @@ export default function Dashboard({ children }) {
             <div className="flex flex-col sm:flex-row h-screen">
 
                 {/* Sidebar */}
-                <div className="flex justify-start items-center h-screen">
+                {/* <div className="flex justify-start items-center h-screen">
   <nav className="flex flex-col h-full w-32 sm:w-48 p-2 bg-white rounded-2xl shadow-lg justify-center items-center">
       <ul>
           <li className="mb-3 text-center">
@@ -15,7 +15,16 @@ export default function Dashboard({ children }) {
           </li>
       </ul>
   </nav>
-                </div>
+                </div> */}
+<div className="flex justify-start items-center h-screen">
+  <nav className="flex flex-col h-full w-32 sm:w-48 lg:w-64 p-2 bg-white rounded-2xl shadow-lg justify-center items-center">
+      <ul>
+          <li className="mb-3 text-center">
+              <Link href={route('employee.add-task')}> Add Task </Link>
+          </li>
+      </ul>
+  </nav>
+</div>
 
       
 
