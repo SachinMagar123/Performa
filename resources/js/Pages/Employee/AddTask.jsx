@@ -21,7 +21,11 @@ const AddTask = () => {
   // Handle form submission
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    Inertia.post(route('employee.store-task'), form);
+    Inertia.post(route('employee.store-task'), form, {
+      onSuccess: () => {
+        Inertia.visit(route('Assignment.jsx'));
+      }
+    });
   };
 
   return (
