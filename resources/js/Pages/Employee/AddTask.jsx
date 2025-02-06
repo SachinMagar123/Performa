@@ -37,11 +37,6 @@ const AddTask = () => {
             required
           />
 
-<<<<<<< Updated upstream
-    <div className='flex-1 w-80 h-32 p-8 bg-slate-500'>
-      chalyo
-    </div>
-=======
           <input
             name='task_type'
             type="text"
@@ -76,7 +71,6 @@ const AddTask = () => {
           <button type="submit">Create Task</button>
         </form>
       </div>
->>>>>>> Stashed changes
     </Dashboard>
   );
 };
