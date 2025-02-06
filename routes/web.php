@@ -25,6 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/employee-task-list',[EmployeeController::class, 'taskList'])->name('employee.task-list');
     Route::get('/employee-add-task',[EmployeeController::class, 'addTask'])->name('employee.add-task');
+    Route::post('/employee-add-task',[EmployeeController::class, 'storeTask'])->name('employee.store-task');
 
 }); 
 
