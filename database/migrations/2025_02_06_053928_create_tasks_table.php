@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('task_name');
             $table->text('task_type');
             $table->date('deadline');
-            $table->text('Priority_level');
+            $table->text('priority_level');
             $table->timestamps();
         });
     }
