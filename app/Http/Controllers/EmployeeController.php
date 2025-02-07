@@ -12,7 +12,7 @@ class EmployeeController extends Controller
     public function taskList()
     {
         return Inertia::render('Employee/TaskList', [
-            'tasks' => Task::with('report')->get(), // Fetch all tasks to display
+            'tasks' => Task::with('report')->get(), // Fetch all tasks to display for detailing
         ]);
     }
 
