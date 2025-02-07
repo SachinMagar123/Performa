@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('task_id');
-            $table->integer('timer')->default(0); // Store time in seconds
-            $table->string('status')->default('in-progress'); // Status of the task
+            $table->integer('time_spent')->default(0); // Store time in seconds
+            $table->string('status')->default('pending'); // Status of the task
             $table->timestamps();
             
             // Add foreign key if you have a tasks table
