@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from '../Dashboard';
-import { FaPlay, FaPause, FaRedo } from 'react-icons/fa';
+import { FaPlay, FaPause, FaRedo, FaFileAlt } from 'react-icons/fa';
 
 const Assignment = ({ task }) => {
   const [timer, setTimer] = useState(0);
@@ -181,6 +181,12 @@ const Assignment = ({ task }) => {
         </div>
         <p className="text-xl font-semibold text-gray-700">{randomText}</p>
       </div>
+
+      <button className="absolute bottom-4 right-6 bg-gray-700 text-white p-3 rounded-full shadow-md hover:bg-gray-900 transition duration-300"
+>
+  <FaFileAlt size={24} />
+</button>
+
     </Dashboard>
   );
 };
