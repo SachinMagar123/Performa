@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Task;
 use App\Models\Report;
+use \Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -23,6 +24,9 @@ class EmployeeController extends Controller
 
     public function storeTask(Request $request)
     {
+
+        $user = Auth::user();
+
         $validatedData = $request->validate([
             'task_name' => 'required|string|max:255',
             'task_type' => 'required|string|max:255',
@@ -31,7 +35,13 @@ class EmployeeController extends Controller
         ]);
 
         // Create the task
-        $task = Task::create($validatedData);
+        $task = Task::create([
+            'user_id' => $user->id, // Assign to the logged-in user
+            'task_name' => $validatedData['task_name'],
+            'task_type' => $validatedData['task_type'],
+            'deadline' => $validatedData['deadline'],
+            'priority_level' => $validatedData['priority_level'],
+        ]);
 
         // Initialize a report for the task
         Report::create([

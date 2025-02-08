@@ -38,6 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
   
     Route::get('/admin-dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/user-list',[AdminController::class, 'userList'])->name('admin.user-list');
+    Route::get('/admin/user/{userId}/tasks', [AdminController::class, 'showUserTasks'])->name('admin.user-tasks');
+    Route::get('/admin/task/{taskId}/report', [AdminController::class, 'showTaskReport'])->name('admin.task-report');
   
 });
 
