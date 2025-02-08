@@ -54,13 +54,13 @@ const Assignment = ({ task }) => {
 
     // Update the random text based on progress
     if (progressValue < 25) {
-      setRandomText("");
+      setRandomText("Keep going, you're just getting started!");
     } else if (progressValue < 50) {
-      setRandomText("");
+      setRandomText("You're making great progress!");
     } else if (progressValue < 75) {
-      setRandomText("");
+      setRandomText("Almost there, keep it up!");
     } else {
-      setRandomText("");
+      setRandomText("Fantastic work, you're almost done!");
     }
   }, [timer]);
 
@@ -88,82 +88,90 @@ const Assignment = ({ task }) => {
 
   return (
     <Dashboard>
-      <div className="flex w-full max-w-4xl bg-gradient-to-r from-orange-500 to-orange-700 p-6 rounded-lg shadow-xl max-h-screen overflow-auto ml-24 mt-6">
-        {task ? (
-          <div className="flex justify-center items-center w-full">
-            <h1 className="text-4xl font-bold text-white mb-6">{task.task_name}</h1>
-          </div>
-        ) : (
-          <p className="text-red-500 text-center w-full">No task found.</p>
-        )}
+   
+   {task ? (
+  <div className="flex justify-center items-center w-full mt-2 ml-96">
+    <h1 className="text-4xl font-bold text-white">{task.task_name}</h1>
+  </div>
+) : (
+  <p className="text-red-500 text-center w-full">No task found.</p>
+)}
 
-        <div className="w-full flex flex-col space-y-6 overflow-auto">
-          {/* Task Details Box */}
-          <div className="w-full bg-orange-400 p-6 rounded-lg shadow-lg mb-2">
-            <h2 className="text-3xl font-semibold mb-4 text-white">Task Details</h2>
-            {task ? (
-              <div className="space-y-2">
-                <p className="text-white"><strong>Type:</strong> {task.task_type}</p>
-                <p className="text-white"><strong>Deadline:</strong> {task.deadline}</p>
-                <p className="text-white"><strong>Priority:</strong> {task.priority_level}</p>
-              </div>
-            ) : (
-              <p className="text-white">No details available.</p>
-            )}
-          </div>
-
-          {/* Status Box */}
-          <div className="w-full bg-orange-400 p-6 rounded-lg shadow-lg">
-            <h2 className="text-3xl font-semibold mb-4 text-white">Status</h2>
-            <div className="flex flex-col items-start space-y-4">
-              {["in-progress", "on-doing", "completed", "cancelled"].map((s) => (
-                <label key={s} className="text-white text-lg">
-                  <input
-                    type="radio"
-                    name="status"
-                    value={s}
-                    checked={status === s}
-                    onChange={(e) => setStatus(e.target.value)}
-                    className="mr-2 accent-orange-600"
-                  />
-                  {s.charAt(0).toUpperCase() + s.slice(1)}
-                </label>
-              ))}
-            </div>
-          </div>
+<div className="flex w-full max-w-6xl bg-gradient-to-r from-orange-500 to-orange-700 p-6 rounded-lg shadow-xl max-h-screen overflow-auto ml-96 mt-6">
+  {/* Task Details and Status in Horizontal Layout */}
+  <div className="w-full flex flex-row space-x-6 overflow-auto">
+    {/* Task Details Box */}
+    <div className="w-1/2 bg-orange-400 p-6 rounded-lg shadow-lg">
+      <h2 className="text-3xl font-semibold mb-4 text-white">Task Details</h2>
+      {task ? (
+        <div className="space-y-2">
+          <p className="text-white"><strong>Type:</strong> {task.task_type}</p>
+          <p className="text-white"><strong>Deadline:</strong> {task.deadline}</p>
+          <p className="text-white"><strong>Priority:</strong> {task.priority_level}</p>
         </div>
+      ) : (
+        <p className="text-white">No details available.</p>
+      )}
+    </div>
+
+    {/* Status Box */}
+    <div className="w-1/2 bg-orange-400 p-6 rounded-lg shadow-lg">
+      <h2 className="text-3xl font-semibold mb-4 text-white">Status</h2>
+      <div className="flex flex-col items-start space-y-4">
+        {["in-progress", "on-doing", "completed", "cancelled"].map((s) => (
+          <label key={s} className="text-white text-lg">
+            <input
+              type="radio"
+              name="status"
+              value={s}
+              checked={status === s}
+              onChange={(e) => setStatus(e.target.value)}
+              className="mr-2 accent-orange-600"
+            />
+            {s.charAt(0).toUpperCase() + s.slice(1)}
+          </label>
+        ))}
       </div>
+    </div>
+  </div>
+</div>
 
-      <div className="absolute top-10 right-10 flex flex-col items-center justify-center z-10 space-y-2">
-        <p className="text-xl font-semibold text-white zoom-in-out">Your Timing</p>
-        <div className="flex items-center bg-white w-36 h-12 rounded-full shadow-lg p-3">
-          <p className="text-2xl font-semibold text-orange-500 pl-3">{formatTime(timer)}</p>
-        </div>
+{/* Timer UI */}
+<div className="absolute top-10 right-10 flex flex-col items-center justify-center z-10 space-y-2">
+  <p className="text-xl font-semibold text-white zoom-in-out">Your Timing</p>
+  <div className="flex items-center bg-white w-36 h-12 rounded-full shadow-lg p-3">
+    <p className="text-2xl font-semibold text-orange-500 pl-3">{formatTime(timer)}</p>
+  </div>
 
-        <div className="flex space-x-6 mt-4">
-          <button
-            onClick={handleToggleTimer}
-            className={`w-10 h-10 rounded-full flex justify-center items-center text-white text-3xl transition-all duration-300 ${isRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-orange-600 hover:bg-orange-700'}`}
-          >
-            {isRunning ? <FaPause /> : <FaPlay />}
-          </button>
+  <div className="flex space-x-6 mt-4">
+    <button
+      onClick={handleToggleTimer}
+      className={`w-10 h-10 rounded-full flex justify-center items-center text-white text-3xl transition-all duration-300 ${isRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-orange-600 hover:bg-orange-700'}`}
+    >
+      {isRunning ? <FaPause /> : <FaPlay />}
+    </button>
 
-          <button
-            onClick={handleResetTimer}
-            className="w-10 h-10 rounded-full flex justify-center items-center text-white text-3xl bg-gray-500 hover:bg-gray-600 transition-all duration-300"
-          >
-            <FaRedo />
-          </button>
-        </div>
-      </div>
+    <button
+      onClick={handleResetTimer}
+      className="w-10 h-10 rounded-full flex justify-center items-center text-white text-3xl bg-gray-500 hover:bg-gray-600 transition-all duration-300"
+    >
+      <FaRedo />
+    </button>
+  </div>
+</div>
+
+
+
+
 
       {/* Progress Bar and Report Button at the Bottom */}
+      <div className="fixed bottom-4 left-32 right-16 flex items-center justify-center space-x-6 z-10 px-6">
 
-{/* Progress Bar and Report Button at the Bottom */}
-<div className="absolute bottom-22 left-32 right-16 flex items-center space-x-6 z-10">
+  <p className="text-lg text-white mt-2 absolute bottom-16 left-88">{randomText}</p>
+
   {/* Progress Bar */}
-  <div className="w-2/3 bg-gray-200 rounded-full flex-1">
-    <div className="bg-green-500 h-2 rounded-full" style={{ width: `${progress}%` }}></div>
+  <div className="w-1/2 bg-gray-200 rounded-full flex-1">
+    <div className="bg-green-500 h-6 rounded-full" style={{ width: `${progress}%` }}></div>
   </div>
 
   {/* Report Button */}
@@ -174,9 +182,7 @@ const Assignment = ({ task }) => {
     <FaFileAlt size={24} />
   </button>
 </div>
-          
-
-      <p className="text-lg text-white mt-2 absolute bottom-20 left-10">{randomText}</p>
+   
     </Dashboard>
   );
 };
