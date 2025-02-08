@@ -1,33 +1,33 @@
+/* Default styling for larger screens */
+textarea {
+    border: 1px solid #ddd; 
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: none;
+    height: 250px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
 /* Blink effect for the border and glow effect when focused */
 textarea:focus {
     animation: blinkBorder 1s ease-in-out infinite;
-    border-color: #ff9e00; /* Orange color for the border */
-    outline: none; /* Removes default outline */
+    border-color: #ff9e00; 
+    outline: none; 
     box-shadow: 0 0 20px rgba(255, 158, 0, 0.8), 0 0 40px rgba(255, 158, 0, 0.6); /* More intense orange glow */
 }
 
 /* Animation for the blinking effect of the border */
 @keyframes blinkBorder {
     0% {
-        border-color: #ff9e00; /* Orange border */
+        border-color: #ff9e00;
     }
     50% {
-        border-color: #fff; /* White border (border disappears) */
+        border-color: #fff;
     }
     100% {
-        border-color: #ff9e00; /* Orange border */
+        border-color: #ff9e00; 
     }
-}
-
-/* Style for the textareas */
-textarea {
-    border: 1px solid #ddd; /* Default border color */
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 16px;
-    resize: none;
-    height: 250px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for border and shadow */
 }
 
 /* Optional: Add custom style for the toolbar */
@@ -37,4 +37,43 @@ textarea {
 
 .toolbar-btn:hover {
     background-color: #2d92d9; /* Darker blue on hover */
+}
+
+/* RESPONSIVENESS */
+
+@media screen and (max-width: 1024px) {
+    textarea {
+        font-size: 14px; 
+        height: 200px; 
+    }
+
+    .toolbar-btn {
+        font-size: 14px; 
+    }
+}
+
+=
+@media screen and (max-width: 768px) {
+    textarea {
+        font-size: 12px; 
+        height: 150px; 
+        padding: 8px; 
+    }
+
+    .toolbar-btn {
+        font-size: 12px; /* Further reduce size of toolbar buttons */
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    textarea {
+        font-size: 10px; 
+        height: 120px; 
+        padding: 6px; 
+    }
+
+    .toolbar-btn {
+        font-size: 10px; 
+    }
 }
