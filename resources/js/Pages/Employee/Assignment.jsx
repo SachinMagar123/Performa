@@ -60,12 +60,14 @@ const Assignment = ({ task }) => {
   const handleSubmitReport = () => {
     if (!task) return alert("No task found!");
 
-    router.post('/employee/update-report/' + task.id, {
+    router.post(`/employee/update-report/${task.id}` , {
       status: status,
       time_spent: timer,
     }, {
-      onSuccess: () => alert("Report saved successfully!"),
-      onError: (errors) => alert("Error saving report!"),
+      onSuccess: () => {
+        router.get(`/employee/report/${task.id}`); // Redirect to report page after saving
+      },
+      onError: () => alert("Error saving report!"),
     });
   };
 
@@ -87,7 +89,7 @@ const Assignment = ({ task }) => {
               <>
                 <p><strong>Type:</strong> {task.task_type}</p>
                 <p><strong>Deadline:</strong> {task.deadline}</p>
-                <p><strong>Priority:</strong> {task.Priority_level}</p>
+                <p><strong>Priority:</strong> {task.priority_level}</p>
               </>
             ) : (
               <p>No details available.</p>

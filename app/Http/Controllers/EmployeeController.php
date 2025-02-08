@@ -27,7 +27,7 @@ class EmployeeController extends Controller
             'task_name' => 'required|string|max:255',
             'task_type' => 'required|string|max:255',
             'deadline' => 'required|date',
-            'Priority_level' => 'required|string|in:low,medium,high',
+            'priority_level' => 'required|string|in:low,medium,high',
         ]);
 
         // Create the task
@@ -39,14 +39,16 @@ class EmployeeController extends Controller
             'time_spent' => 0,  
             'status' => 'pending', 
         ]);
+        
 
         return redirect()->route('employee.assignment', ['task_id' => $task->id]);
     }
 
     public function assignment(Request $request)
     {
+        // dd($request->all());
         $task = Task::with('report')->find($request->task_id);
-        
+        // dd($task->report);
         if (!$task) {
             return redirect()->route('employee.task-list')->withErrors('Task not found.');
         }
@@ -56,8 +58,9 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function updateReport(Request $request, $taskId)
+    public function updateReport(Request $request, $task_id)
 {
+
     // Validate incoming data
     $validatedData = $request->validate([
         'time_spent' => 'required|integer|min:0',
@@ -65,29 +68,52 @@ class EmployeeController extends Controller
     ]);
 
     // Find the task and associated report
-    $task = Task::find($taskId);
+    $task = Task::find($task_id);
 
     if (!$task) {
-        return response()->json(['message' => 'Task not found'], 404);
-    }
+        return redirect()->route('dashboard')->with('error', 'Task not found.');}
 
     // Find or create the report
-    $report = Report::firstOrNew(['task_id' => $taskId]);
+    $report = Report::firstOrNew(['task_id' => $task_id]);
     
     // Update the report
     $report->time_spent = $validatedData['time_spent'];
     $report->status = $validatedData['status'];
     $report->save();
 
-    // just to check response
-    // return response()->json(['message' => 'Report updated successfully', 'report' => $report]);
 
-    //make new file to show the reports
+    return redirect()->route('employee.report', ['task_id' => $task_id]);
+
+
+  
+} 
+
+// public function showReport($task_id)
+// {
+//     $task = Task::with('report')->find($task_id);
+  
+//     if (!$task) {
+//         return redirect()->route('dashboard')->with('error', 'Task not found.');
+//     }
+
+//     return Inertia::render('Employee/ReportSummary', [
+//         'task' => $task,
+//         'report' => $task->report, // Fetch report from the task
+//         'message' => 'Report loaded successfully!',
+//     ]);
+// }
+
+public function showReport(Request $request)
+{
+    $task = Task::with('report')->find($request->task_id);
+    // dd($task->report);
+    if (!$task) {
+        return redirect()->route('employee.assignment')->withErrors('Task not found.');
+    }
+
     return Inertia::render('Employee/ReportSummary', [
         'task' => $task,
-        'report' => $report,
-        'message' => 'Report updated successfully!',
+        'report' => $task->report,
     ]);
 }
-
 }

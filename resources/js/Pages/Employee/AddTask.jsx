@@ -94,7 +94,7 @@ const AddTask = ({ setIsFormVisible }) => {
     task_name: '',
     task_type: '',
     deadline: '',
-    Priority_level: ''
+    priority_level: ''
   });
 
   const [isFormVisible, setIsFormVisibleState] = useState(true);
@@ -150,7 +150,7 @@ const AddTask = ({ setIsFormVisible }) => {
             />
 
             <select
-              name="Priority_level"
+              name="priority_level"
               value={form.priority_level}
               onChange={handleChange}
               required
