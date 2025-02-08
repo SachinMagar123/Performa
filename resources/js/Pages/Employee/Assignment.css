@@ -1,0 +1,18 @@
+/* Define the zoom-in-out animation */
+@keyframes zoomInOut {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* animation */
+  .zoom-in-out {
+    animation: zoomInOut 2s infinite;
+  }
+  
