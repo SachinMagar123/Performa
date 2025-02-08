@@ -7,7 +7,7 @@ const AddTask = ({ setIsFormVisible }) => {
     task_name: '',
     task_type: '',
     deadline: '',
-    Priority_level: '',
+    priority_level: '',
   });
 
   const [isFormVisible, setIsFormVisibleState] = useState(true);
