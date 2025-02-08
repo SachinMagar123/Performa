@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { usePage, router } from '@inertiajs/react'; // Import Inertia's router
+import { usePage, router } from '@inertiajs/react';
 import Dashboard from '../Dashboard';
 import { FaPlay, FaPause, FaRedo, FaFileAlt } from 'react-icons/fa';
+import './Assignment.css';
 
 const Assignment = ({ task }) => {
   const [timer, setTimer] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [status, setStatus] = useState('in-progress');
+  const [randomText, setRandomText] = useState('Keep up the great work!');
+  const [progress, setProgress] = useState(0); // New state for tracking progress
 
   const randomTexts = [
     "Keep up the great work!",
@@ -16,7 +19,6 @@ const Assignment = ({ task }) => {
     "Keep pushing forward!",
     "Success is on the horizon!"
   ];
-  const [randomText, setRandomText] = useState(randomTexts[0]);
 
   // Start/stop/reset the timer
   const handleToggleTimer = () => {
@@ -40,6 +42,28 @@ const Assignment = ({ task }) => {
     return () => clearInterval(interval);
   }, [isRunning]);
 
+  // Calculate progress as a percentage (assume taskDuration is the total time allotted for the task)
+  const taskDuration = 3600; // Example total task duration in seconds (1 hour)
+  const calculateProgress = () => {
+    return (timer / taskDuration) * 100;
+  };
+
+  useEffect(() => {
+    const progressValue = calculateProgress();
+    setProgress(progressValue);
+
+    // Update the random text based on progress
+    if (progressValue < 25) {
+      setRandomText("");
+    } else if (progressValue < 50) {
+      setRandomText("");
+    } else if (progressValue < 75) {
+      setRandomText("");
+    } else {
+      setRandomText("");
+    }
+  }, [timer]);
+
   // Format time 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
@@ -47,20 +71,11 @@ const Assignment = ({ task }) => {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  // Change motivational text every 20s
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * randomTexts.length);
-      setRandomText(randomTexts[randomIndex]);
-    }, 20000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Submiting report to the database
+  // Submit report to the database
   const handleSubmitReport = () => {
     if (!task) return alert("No task found!");
 
-    router.post(`/employee/update-report/${task.id}` , {
+    router.post(`/employee/update-report/${task.id}`, {
       status: status,
       time_spent: timer,
     }, {
@@ -73,41 +88,43 @@ const Assignment = ({ task }) => {
 
   return (
     <Dashboard>
-      {task ? (
-        <h1 className="text-3xl font-bold text-white mb-6 text-center w-full">
-          {task.task_name}
-        </h1>
-      ) : (
-        <p className="text-red-500 text-center w-full">No task found.</p>
-      )}
+      <div className="flex w-full max-w-4xl bg-gradient-to-r from-orange-500 to-orange-700 p-6 rounded-lg shadow-xl max-h-screen overflow-auto ml-24 mt-6">
+        {task ? (
+          <div className="flex justify-center items-center w-full">
+            <h1 className="text-4xl font-bold text-white mb-6">{task.task_name}</h1>
+          </div>
+        ) : (
+          <p className="text-red-500 text-center w-full">No task found.</p>
+        )}
 
-      <div className="flex w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg">
-        <div className="w-full flex flex-col">
-          <div className="w-full mb-4">
-            <h2 className="text-xl font-semibold mb-4">Task Details</h2>
+        <div className="w-full flex flex-col space-y-6 overflow-auto">
+          {/* Task Details Box */}
+          <div className="w-full bg-orange-400 p-6 rounded-lg shadow-lg mb-2">
+            <h2 className="text-3xl font-semibold mb-4 text-white">Task Details</h2>
             {task ? (
-              <>
-                <p><strong>Type:</strong> {task.task_type}</p>
-                <p><strong>Deadline:</strong> {task.deadline}</p>
-                <p><strong>Priority:</strong> {task.priority_level}</p>
-              </>
+              <div className="space-y-2">
+                <p className="text-white"><strong>Type:</strong> {task.task_type}</p>
+                <p className="text-white"><strong>Deadline:</strong> {task.deadline}</p>
+                <p className="text-white"><strong>Priority:</strong> {task.priority_level}</p>
+              </div>
             ) : (
-              <p>No details available.</p>
+              <p className="text-white">No details available.</p>
             )}
           </div>
 
-          <div className="w-full">
-            <h2 className="text-xl font-semibold mb-4">Status</h2>
-            <div className="flex flex-col items-start space-y-2">
+          {/* Status Box */}
+          <div className="w-full bg-orange-400 p-6 rounded-lg shadow-lg">
+            <h2 className="text-3xl font-semibold mb-4 text-white">Status</h2>
+            <div className="flex flex-col items-start space-y-4">
               {["in-progress", "on-doing", "completed", "cancelled"].map((s) => (
-                <label key={s}>
+                <label key={s} className="text-white text-lg">
                   <input
                     type="radio"
                     name="status"
                     value={s}
                     checked={status === s}
                     onChange={(e) => setStatus(e.target.value)}
-                    className="mr-2"
+                    className="mr-2 accent-orange-600"
                   />
                   {s.charAt(0).toUpperCase() + s.slice(1)}
                 </label>
@@ -117,36 +134,53 @@ const Assignment = ({ task }) => {
         </div>
       </div>
 
-      <div className="absolute top-24 right-4 flex items-center justify-center z-10">
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center bg-gray-300 w-48 h-10 rounded-full">
-            <p className="text-xl font-bold text-gray-800 pl-2">{formatTime(timer)}</p>
-          </div>
+      <div className="absolute top-10 right-10 flex flex-col items-center justify-center z-10 space-y-2">
+        <p className="text-xl font-semibold text-white zoom-in-out">Your Timing</p>
+        <div className="flex items-center bg-white w-36 h-12 rounded-full shadow-lg p-3">
+          <p className="text-2xl font-semibold text-orange-500 pl-3">{formatTime(timer)}</p>
+        </div>
 
+        <div className="flex space-x-6 mt-4">
           <button
             onClick={handleToggleTimer}
-            className={`w-16 h-16 rounded-full flex justify-center items-center text-white text-2xl ${isRunning ? 'bg-red-500' : 'bg-green-500'}`}
+            className={`w-10 h-10 rounded-full flex justify-center items-center text-white text-3xl transition-all duration-300 ${isRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-orange-600 hover:bg-orange-700'}`}
           >
             {isRunning ? <FaPause /> : <FaPlay />}
           </button>
 
           <button
             onClick={handleResetTimer}
-            className="w-16 h-16 rounded-full flex justify-center items-center text-white text-2xl bg-gray-500"
+            className="w-10 h-10 rounded-full flex justify-center items-center text-white text-3xl bg-gray-500 hover:bg-gray-600 transition-all duration-300"
           >
             <FaRedo />
           </button>
         </div>
       </div>
 
-      <button
-        onClick={handleSubmitReport}
-        className="absolute bottom-4 right-6 bg-gray-700 text-white p-3 rounded-full shadow-md hover:bg-gray-900 transition duration-300"
-      >
-        <FaFileAlt size={24} />
-      </button>
+      {/* Progress Bar and Report Button at the Bottom */}
+
+{/* Progress Bar and Report Button at the Bottom */}
+<div className="absolute bottom-22 left-32 right-16 flex items-center space-x-6 z-10">
+  {/* Progress Bar */}
+  <div className="w-2/3 bg-gray-200 rounded-full flex-1">
+    <div className="bg-green-500 h-2 rounded-full" style={{ width: `${progress}%` }}></div>
+  </div>
+
+  {/* Report Button */}
+  <button
+    onClick={handleSubmitReport}
+    className="bg-orange-700 text-white p-4 rounded-full shadow-xl hover:bg-orange-800 transition-all duration-300"
+  >
+    <FaFileAlt size={24} />
+  </button>
+</div>
+          
+
+      <p className="text-lg text-white mt-2 absolute bottom-20 left-10">{randomText}</p>
     </Dashboard>
   );
 };
 
 export default Assignment;
+
+
