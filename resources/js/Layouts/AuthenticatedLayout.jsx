@@ -13,11 +13,14 @@ export default function AuthenticatedLayout({ header, children }) {
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav className="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800">
+            <nav
+                className="border-b border-gray-100 dark:border-gray-700 dark:bg-gray-800"
+                style={{ backgroundColor: '#FBF5DD' }}  // Updated navbar color
+            >
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
-                            <div className="flex shrink-0 items-center">
+                            <div className=" flex shrink-0 items-center">
                             <Link href="/" className="flex items-center">
     <svg
         height="40px"
@@ -46,7 +49,7 @@ export default function AuthenticatedLayout({ header, children }) {
             </g>
         </g>
     </svg>
-    <span className="text-white ml-2">PERFORMA</span>
+    <span style={{ fontFamily: "'Roboto', sans-serif", fontWeight: '700' }} className=" ml-2">PERFORMA</span>
 </Link>
 
 
@@ -54,21 +57,18 @@ export default function AuthenticatedLayout({ header, children }) {
 
                             {/* admin-nav */}
 
-
                             {user.role == 'admin' && (
-
                                 <>
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                   <NavLink>
                                     <Link href={route('admin.dashboard')}>Admin Dashboard</Link>
                                   </NavLink>
-                                    </div>    
+                                </div>    
                                 </>
                             )}
                             {/* employee-nav */}
 
                             {user.role == 'employee' && (
-
                                 <>
                                   <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                    <NavLink
@@ -88,8 +88,6 @@ export default function AuthenticatedLayout({ header, children }) {
                                     </NavLink>
                                       </div>
                                 </>
-
-                                        
                             )}
                         
 
@@ -106,7 +104,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                                 type="button"
                                                 className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
                                             >
-                                               Hi, {user.name} !
+                                               {/* Updated Font Style */}
+                                               <span style={{ fontFamily: "'Roboto', sans-serif", fontWeight: '700', color: '#FBF5DD' }} className="fw-bold"
+                                                >
+                                                     Hi, {user.name} !
+                                                                </span>
+
 
                                                 <svg
                                                     className="-me-0.5 ms-2 h-4 w-4"
