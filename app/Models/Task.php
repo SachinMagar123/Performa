@@ -9,7 +9,7 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['task_name', 'task_type', 'deadline', 'Priority_level'];
+    protected $fillable = ['task_name', 'task_type', 'deadline', 'priority_level'];
 
     // Define the relationship to Report
     public function report()

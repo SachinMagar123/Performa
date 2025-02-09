@@ -28,8 +28,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/employee-add-task',[EmployeeController::class, 'storeTask'])->name('employee.store-task');
     Route::get('/employee-assignment', [EmployeeController::class, 'assignment'])->name('employee.assignment');
     // Route::post('/employee/update-report/{taskId}', [EmployeeController::class, 'updateReport'])->name('employee.update-report');
-    Route::post('/employee/update-report/{taskId}', [EmployeeController::class, 'updateReport'])->middleware(['auth', 'verified'])->name('employee.update-report');
+    Route::post('/employee/update-report/{task_id}', [EmployeeController::class, 'updateReport'])->middleware(['auth', 'verified'])->name('employee.update-report');
 
+    Route::get('/employee/report/{task_id}', [EmployeeController::class, 'showReport'])->middleware(['auth', 'verified'])->name('employee.report');
 }); 
 
 
