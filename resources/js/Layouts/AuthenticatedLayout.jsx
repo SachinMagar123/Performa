@@ -71,8 +71,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                     <Link href={route('admin.user-list')}>Users</Link>
                                   </NavLink>
                                     </div>    
-
-                                </div>    
+                             {/* </div>     */}
 
                                 </>
                             )}
