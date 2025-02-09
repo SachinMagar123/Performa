@@ -4,6 +4,7 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { ArrowLeft } from "lucide-react";
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
@@ -238,7 +239,22 @@ export default function AuthenticatedLayout({ header, children }) {
                 </div>
             </nav>
 
-            <main>{children}</main>
+<main className="flex flex-col min-h-screen relative">
+    {children}
+
+    {/* Back Button */}
+  {route().current() !== 'employee.report' && (
+    <div className="absolute bottom-24 left-28">
+        <button
+            onClick={() => window.history.back()}
+            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+        >
+            <ArrowLeft size ={20}/>
+        </button>
+    </div>
+)}
+</main>
+
         </div>
     );
 }
