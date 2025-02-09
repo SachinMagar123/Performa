@@ -54,53 +54,56 @@ export default function Dashboard({ children }) {
         <AuthenticatedLayout>
             <div className="flex flex-col sm:flex-row h-screen relative">
                 {/* Sidebar */}
-                <div className={`sidebar transition-transform transform ${isSliderOpen ? 'translate-x-0' : '-translate-x-full'} 
+               {route().current() !== 'employee.report' && (
+    <div className={`sidebar transition-transform transform ${isSliderOpen ? 'translate-x-0' : '-translate-x-full'} 
                     fixed top-16 left-0 h-[91vh] w-20 lg:w-24 p-4 shadow-lg flex flex-col justify-between items-center z-20`} 
                     style={{ backgroundColor: '#FBF5DD' }}
                 >
-                    <button 
-                        onClick={toggleSlider} 
-                        className="absolute top-5 right-[-45px] w-10 h-10 bg-blue-600 text-white rounded-full flex justify-center items-center transition-transform"
-                    >
-                        <FaBars size={20} />
-                    </button>
-                    <ul className="space-y-8 mt-8 flex-grow flex flex-col justify-evenly">
-                        <li>
-                            <a href="https://chat.openai.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
-                                <FaRegComments size={24} />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.grammarly.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
-                                <FaPenSquare size={24} />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://docs.google.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
-                                <FaGoogle size={24} />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
-                                <FaCalendarAlt size={24} />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://sheets.google.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
-                                <FaGoogleDrive size={24} />
-                            </a>
-                        </li>
-                    </ul>
-                    <div className="mb-6">
-                        <Link 
-                            href={route('employee.add-task')} 
-                            className="bg-blue-600 text-white p-2 rounded-full flex items-center justify-center hover:bg-blue-700"
-                            onClick={() => setSliderOpen(true)}
-                        >
-                            <FaPlus size={24} />
-                        </Link>
-                    </div>
-                </div>
+        <button 
+            onClick={toggleSlider} 
+            className="absolute top-5 right-[-45px] w-10 h-10 bg-blue-600 text-white rounded-full flex justify-center items-center transition-transform"
+        >
+            <FaBars size={20} />
+        </button>
+        <ul className="space-y-8 mt-8 flex-grow flex flex-col justify-evenly">
+            <li>
+                <a href="https://chat.openai.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
+                    <FaRegComments size={24} />
+                </a>
+            </li>
+            <li>
+                <a href="https://www.grammarly.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
+                    <FaPenSquare size={24} />
+                </a>
+            </li>
+            <li>
+                <a href="https://docs.google.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
+                    <FaGoogle size={24} />
+                </a>
+            </li>
+            <li>
+                <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
+                    <FaCalendarAlt size={24} />
+                </a>
+            </li>
+            <li>
+                <a href="https://sheets.google.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
+                    <FaGoogleDrive size={24} />
+                </a>
+            </li>
+        </ul>
+        <div className="mb-6">
+            <Link 
+                href={route('employee.add-task')} 
+                className="bg-blue-600 text-white p-2 rounded-full flex items-center justify-center hover:bg-blue-700"
+                onClick={() => setSliderOpen(true)}
+            >
+                <FaPlus size={24} />
+            </Link>
+        </div>
+    </div>
+)}
+
 
                 {/* Main content */}
                 <div className="flex-1 p-4 sm:p-8 flex flex-col sm:flex-row justify-between items-center sm:items-start">
@@ -115,7 +118,7 @@ export default function Dashboard({ children }) {
                     )}
 
                     {/* Hide textareas only in Assignment.jsx */}
-                    {route().current() !== 'employee.assignment' && (
+                    {route().current() !== 'employee.assignment' && route().current() !== 'employee.report' && (
                         <div className="flex flex-col gap-4 items-end w-full sm:w-1/3 h-full relative top-[-30px]">
                             <div className="p-4 bg-light rounded shadow-sm w-full h-auto">
                                 <h3 className="text-gray-400 mb-2 text-center flex items-center justify-center gap-2">
