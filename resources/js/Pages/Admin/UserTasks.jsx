@@ -1,8 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { usePage } from '@inertiajs/react';
+import PieChart from './PieChartComponent';
 
 const UserTasks = () => {
-    const { tasks, user_id } = usePage().props;
+    const { tasks, user_id  , StatusCounts} = usePage().props;
 
     return (
         <AuthenticatedLayout>
@@ -44,6 +45,14 @@ const UserTasks = () => {
                         )}
                     </tbody>
                 </table>
+
+                {/* piechart */}
+                <div>
+                    <h2 className="text-lg font-bold text-white mt-8 mb-2">Task Status Distribution</h2>
+                    <div className="flex flex-col items-center">
+                        <PieChart data={StatusCounts} />
+                        </div>
+                </div>
             </div>
         </AuthenticatedLayout>
     );
